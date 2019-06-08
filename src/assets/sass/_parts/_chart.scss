@@ -1,0 +1,94 @@
+.chart {
+	//width: 100%;
+	border-spacing: 0;
+	box-shadow: 0 0.5rem 2rem rgba(black,0.25);
+	background-color: white;
+	
+	//border: 3px solid $red;
+	
+	thead {
+		background: $red_grad;
+		background-attachment: fixed;
+		color: white;
+		
+		th {
+			text-align: left;
+			padding: 0.5rem;
+			white-space: nowrap;
+		}
+	}
+	
+	tbody {
+		
+		tr:nth-child(n+11){
+			display: none;
+		}
+
+		tr:nth-child(even){
+			background: lightgray;
+		}
+		
+		td {
+			padding: 0.5rem;
+			white-space: nowrap;
+		}
+	}
+
+	tfoot {
+		td {
+			padding: 0.5rem;
+		}
+	}
+	
+	&.show-all tbody tr { display: table-row; }
+	
+	@media (min-width: 768px){
+		
+		caption {
+			padding: 0 0 0.5rem 0;
+		}
+	}
+	
+	
+	@media (max-width: 767px){
+			border: 0 none;
+	}
+	
+}
+
+@media (max-width: 767px){
+
+	.chart-wrap {
+		overflow-x: scroll;
+		-webkit-overflow-scrolling: touch;
+		//width: 80vw;
+		border: 3px solid $red;
+	}
+
+}
+
+
+.show-all-btn {
+	appearance: none;
+	border: 0;
+	display: inline-block;
+	margin: 0 auto 0 auto;
+	background: none;
+	color: $red;
+	padding: 0.5rem;
+	font-size: 0.875rem;
+	font-weight: bold;
+	line-height: 1rem;
+	border-radius: 5px;
+	cursor: pointer;
+		
+	&:hover {
+		text-decoration: underline;
+	}
+
+	&::after {
+		content: ' ▸';
+		display: inline;
+		font-size: 1rem;
+	}
+}

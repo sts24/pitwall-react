@@ -1,0 +1,14 @@
+$red: #8e0000;
+$gray-light: #eee;
+$gray-mid: #777;
+$gray-dark: #444;
+
+
+$grad1: lighten($red,10%);
+$grad2: darken($red,10%);
+
+$red_grad: linear-gradient(to right, $grad1, $grad2);
+
+$green: #4f900a;
+
+$link_color: #3737a2;

@@ -1,0 +1,24 @@
+
+.loading-spinner {
+	display: inline-block;
+	width: 4em;
+	height: 4em;
+	
+	background-image: url('./assets/images/tire.svg');
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	
+	animation: spin 1s infinite linear;
+
+	@media (min-width: 768px){
+		width: 6em;
+		height: 6em;
+	}
+}
+
+
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}

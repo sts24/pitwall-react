@@ -1,0 +1,165 @@
+@import '_parts/_prepend';
+
+* { box-sizing: border-box; }
+
+body {
+	padding: 0;
+	margin: 0;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	color: $gray-dark;
+
+	@media (min-width: 768px){
+		font-size: 16px;
+	}
+}
+
+a {
+	color: $link-color;
+
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+#page {
+	@media (min-width: 768px){
+		display: grid;
+		grid-gap: 0;
+		grid-template-columns: minmax(200px,20vw) auto;
+		grid-template-rows: minmax(100vh,auto);
+
+		grid-template-areas: 'header content';
+
+		justify-items: stretch;
+		align-items: stretch;
+	}
+}
+
+@import '_parts/_header';
+@import '_parts/_filters';
+
+.content-area {
+	position: relative;
+
+	@media (min-width: 768px){
+		grid-area: content;
+		background-image: url('../images/car-bg.jpg');
+		background-size: auto 480px;
+		background-position: right bottom;
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+	}
+}
+
+.content-block {
+	margin: 1rem;
+
+	@media (min-width: 768px){
+		
+		margin: 2rem;
+	}
+
+	@media (min-width: 1200px){
+		max-width: 80%;
+		margin: 3rem auto;
+	}
+}
+
+.content-header {
+	h1 {
+		font-size: 3em;
+		color: $red;
+	}
+}
+
+.message {
+	text-align: center;
+	font-weight: bold;
+	font-size: rem(21);
+}
+
+.nation-flag {
+	width: auto;
+	height: 1em;
+	margin-left: 1ch;
+	vertical-align: middle;
+	box-shadow: 0 0 1px rgba(black,0.5);
+}
+
+@import '_parts/_chart';
+@import '_parts/_races';
+@import '_parts/_standings';
+@import '_parts/_loading';
+@import '_parts/_site-nav';
+
+
+.hide {
+	display: none;
+}
+
+
+
+// loading transitions
+
+
+.loading-transition {
+	transition: 1s opacity;
+	opacity: 1;
+}
+
+.is-loading {
+	opacity: 0;
+}
+
+
+// errors
+
+.error {
+	margin: 2rem;
+	background: $red;
+	color: white;
+	font-size: rem(32);
+	padding: 1rem;
+	display: inline-block;
+
+	a {
+		color: yellow;
+	}
+}
+
+.overlay {
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	height: 100vh;
+	z-index: 1000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: white;
+
+	@media (max-width: 767px){
+		bottom: 0;
+		height: auto;
+	}
+}
+
+
+.button {
+	cursor: pointer;
+    display: inline-block;
+    font-size: 1.25em;
+    font-weight: bold;
+    border: 0;
+    padding: 0.5rem 1rem;
+    margin: 0;
+    background: $gray-dark;
+    color: white;
+
+    &:hover {
+        background-color: $gray-mid;
+    }
+
+}

@@ -1,0 +1,23 @@
+.standings {
+	
+	@media (min-width: 768px){
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 1rem;
+	}
+	
+}
+
+.standings-table {
+	header {
+		margin: 2rem 0 0.5rem 0;
+		
+		h2 {
+			margin: 0;
+		}
+	}
+	
+	@media (min-width: 768px){
+		header { margin: 0 0 0.5rem 0; }
+	}
+}
