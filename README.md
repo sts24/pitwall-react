@@ -14,3 +14,9 @@ Email me: [hello@smithscott.net](mailto:hello@smithscott.net)
 ## Credits
 - F1 data from the [Ergast API](https://ergast.com/mrd/)
 - Nation flags from [hjnilsson](https://github.com/hjnilsson/country-flags)
+
+## Setup & Start
+
+```
+npm start
+```
