@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
-//import './src/assets/sass/pitwall.scss';
+import './src/assets/sass/pitwall.scss';
 
 import PageHeader from "./src/components/PageHeader";
 import ConstructorStandings  from "./src/components/ConstructorStandings";
@@ -12,9 +12,10 @@ class App extends React.Component {
 
     constructor(props) {
         super(props);
+        this.changeSeason = this.changeSeason.bind(this);
+        this.currentYear = new Date().getFullYear();
         this.state = {
             races: [],
-            seasons: [],
             driverStandings: [],
             constructorStandings: [],
             viewOptions: {
@@ -26,6 +27,9 @@ class App extends React.Component {
         }
     }
 
+    changeSeason(newSeason){
+        this.getData(newSeason);
+    }
 
     getData(loadYear){
         
@@ -75,13 +79,13 @@ class App extends React.Component {
     }
 
     componentDidMount(){
-        this.getData(2009);
+        this.getData(this.currentYear);
     }
 
     render() {
         return (
             <div id="page">
-                <PageHeader></PageHeader>
+                <PageHeader onSeasonSelect={this.changeSeason}></PageHeader>
 
                 <main className="content-area">
 

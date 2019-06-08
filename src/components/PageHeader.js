@@ -3,6 +3,30 @@ import React from "react";
 
 export default class PageHeader extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.seasonSelect = this.seasonSelect.bind(this);
+        this.state = {
+            seasons: []
+        }
+    }
+
+    componentDidMount(){
+        let currentYear = new Date().getFullYear();
+        let yearList = [];
+        for(let year = 1950; year <= currentYear; year++){
+            yearList.push(year);
+        }
+
+        this.setState({
+            seasons: yearList.reverse()
+        });
+    }
+
+    seasonSelect(data){
+        this.props.onSeasonSelect(data.target.value);
+    }
+
     render(){
         return(
         <header className="header">
@@ -13,8 +37,12 @@ export default class PageHeader extends React.Component {
                     
                     <label>Select a Season</label>
                     <div className="season-select-wrapper">
-                        <select id="season-select" v-model="viewOptions.seasonSelect" className="season-select">
-                            <option v-for="season in f1data.seasons" v-bind="season.index" ></option>
+                        <select id="season-select" className="season-select" onChange={this.seasonSelect}>
+                            {
+                                this.state.seasons.map(season => (
+                                    <option value={season} key={season}>{season}</option>
+                                ))
+                            }
                         </select>
                     </div>
                     
