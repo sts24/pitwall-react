@@ -21,7 +21,7 @@ class App extends React.Component {
             constructorStandings: [],
             seasonSelect: '',
             selectedTab: 'races',
-            loading: false,
+            loading: true,
             error: false
           
         }
@@ -78,13 +78,16 @@ class App extends React.Component {
                              constructorStandings: constructorsData
                         });
                     }
-
+					
+					$this.setState({
+				   		loading: false
+	            		});
                 })
                 .then(function(){
-                   
+	               
                 })
                 .catch(function(){
-                    //router.push({ name: 'error' });
+					// error
                 });
         });
         
@@ -96,22 +99,6 @@ class App extends React.Component {
     }
 
     render() {
-        let selectedTab;
-
-        if(this.state.selectedTab == 'races'){
-            selectedTab = <RaceResults races={this.state.races} />;
-        } else if(this.state.selectedTab == 'drivers'){
-            selectedTab = <DriverStandings standings={this.state.driverStandings} />;
-        } else if(this.state.selectedTab == 'constructors'){
-            selectedTab = <ConstructorStandings standings={this.state.constructorStandings} />;
-        }
-
-        let loadingOverlay;
-        if(this.state.loading == true){
-            loadingOverlay = <section className="overlay">
-                <div className="loading-spinner"></div>
-            </section>;
-        }
 
         return (
             <div id="page">
@@ -124,10 +111,26 @@ class App extends React.Component {
                     </header>
                     
                     <section className="content-block">
-                        {selectedTab}
+                        	
+                        	{this.state.selectedTab == 'races' &&
+							<RaceResults races={this.state.races} />
+						}
+						
+						{this.state.selectedTab == 'drivers' &&
+							<DriverStandings standings={this.state.driverStandings} />
+        					} 
+						
+						{this.state.selectedTab == 'constructors' &&
+							<ConstructorStandings standings={this.state.constructorStandings} />
+						}
+                        	
                     </section>
 
-                    {loadingOverlay}
+                    {this.state.loading == true &&
+			            <section className="overlay">
+			                <div className="loading-spinner"></div>
+			            </section>
+			        }
 
                 </main>
 
