@@ -29,7 +29,7 @@ export default class ConstructorStandings extends React.Component {
                                     <tr key={c.Constructor.name}>
                                         <td>{c.position}</td>
                                         <td>
-                                            <a  target="_blank">{c.Constructor.name}</a>
+                                            <a href={c.Constructor.url} target="_blank">{c.Constructor.name}</a>
                                             <img className="nation-flag" />
                                         </td>
                                         <td>{c.points}</td>

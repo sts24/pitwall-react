@@ -11,19 +11,41 @@ export default class RaceTable extends React.Component {
     }
 
     gridDiff(car){
-        let gridDiff = (car.grid - car.position);
-		return gridDiff;
+        let gridData;
+        let gridChange = (car.grid - car.position);
+
+        if(gridChange > 0){
+            gridData = <td><span className="grid-change grid-up">{gridChange}</span></td>;
+        } else if(gridChange < 0){
+            gridData = <td><span className="grid-change grid-down">{Math.abs(gridChange)}</span></td>;
+        } else {
+            gridData = <td></td>;
+        }
+
+		return gridData;
+    }
+
+    formatDate(raceDate){
+        let months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+        let raceUTC = new Date(raceDate);
+
+        return months[raceUTC.getMonth()] + ' ' + raceUTC.getDate() + ', ' + raceUTC.getFullYear();
     }
 
     render(){
         if(!this.state.hasError){
+
+            const race = this.props.results;
+
+            
+
             return(
                 <section className="race-table">
 
                     <header>
-                        <h2>{ }</h2>
-                        <h3><a  target="_blank">{this.props.results.Circuit.circuitName}</a></h3>
-                        <small>Round {this.props.results.round} •  • RACE_DATE • <a target="_blank">Read on Wikipedia</a></small>
+                        <h2>{race.raceName}</h2>
+                        <h3><a href={race.Circuit.url} target="_blank">{race.Circuit.circuitName}</a></h3>
+                        <small>Round {race.round} • {race.Circuit.Location.locality}, {race.Circuit.Location.country} • {this.formatDate(race.date)} • <a href={race.url} target="_blank">Read on Wikipedia</a></small>
                     </header>
 
                     <div className="chart-wrap">
@@ -44,19 +66,17 @@ export default class RaceTable extends React.Component {
                             </thead>
                             <tbody>
                                 {
-                                    this.props.results.Results.map(car => (
+                                    race.Results.map(car => (
                                         <tr key={car.Driver.code}>
                                             <td>{car.positionText}</td>
-                                            <td><span className="grid-change grid-up">{this.gridDiff(car)}</span></td>
-                                            <td><span className="grid-change grid-down">{Math.abs(this.gridDiff(car))}</span></td>
-                                            <td></td>
+                                            {this.gridDiff(car)}
                                             <td>
-                                                <a  target="_blank">{car.Driver.givenName} {car.Driver.familyName}</a> 
+                                                <a href={car.Driver.url} target="_blank">{car.Driver.givenName} {car.Driver.familyName}</a> 
                                                 <img className="nation-flag" /></td>
                                             <td>{car.grid}</td>
                                             <td>{car.number}</td>
                                             <td>
-                                                <a target="_blank">{car.Constructor.name}</a>
+                                                <a href={car.Constructor.url} target="_blank">{car.Constructor.name}</a>
                                                 <img className="nation-flag" />
                                             </td>
                                             <td>{car.FastestLap ? car.FastestLap.Time.time : ''}</td>

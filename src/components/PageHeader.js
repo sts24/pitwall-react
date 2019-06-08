@@ -1,11 +1,11 @@
 import React from "react";
-//import ReactDOM from "react-dom";
 
 export default class PageHeader extends React.Component {
 
     constructor(props) {
         super(props);
         this.seasonSelect = this.seasonSelect.bind(this);
+        this.changeTab = this.changeTab.bind(this);
         this.state = {
             seasons: []
         }
@@ -23,15 +23,20 @@ export default class PageHeader extends React.Component {
         });
     }
 
-    seasonSelect(data){
-        this.props.onSeasonSelect(data.target.value);
+    seasonSelect(e){
+        this.props.onSeasonSelect(e.target.value);
+    }
+
+    changeTab(value,e){
+        e.preventDefault();
+        this.props.onChangeTab(value);
     }
 
     render(){
         return(
         <header className="header">
             <div className="header-contents">
-                <img className="site-title" />
+                <img src="./src/assets/images/pitwall-stacked-white.svg" className="site-title" />
                 
                 <nav className="data-selection">
                     
@@ -47,9 +52,9 @@ export default class PageHeader extends React.Component {
                     </div>
                     
                     <ul className="site-nav">
-                        <li><button className="site-nav-button" >Race Results</button></li>
-                        <li><button className="site-nav-button" >Driver's Championship</button></li>
-                        <li><button className="site-nav-button" >Constructor's Championship</button></li>
+                        <li><button className="site-nav-button" onClick={(e) => this.changeTab('races',e)}>Race Results</button></li>
+                        <li><button className="site-nav-button" onClick={(e) => this.changeTab('drivers',e)}>Driver's Championship</button></li>
+                        <li><button className="site-nav-button" onClick={(e) => this.changeTab('constructors',e)}>Constructor's Championship</button></li>
                     </ul>
 
                     <div className="info">

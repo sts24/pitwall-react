@@ -8,7 +8,7 @@ export default class RaceResults extends React.Component {
 
     render(){
         return(
-            <section className="content-block" v-if="f1data.races.length > 0">
+            <div className="race-results">
                 <header className="races-header">
                     <h2>Race Results</h2>
         
@@ -22,8 +22,7 @@ export default class RaceResults extends React.Component {
                         <RaceTable results={race} key={race.round + '-' + race.date} />
                     ))
                 }
-                
-            </section>
+            </div>
         )
     };
 

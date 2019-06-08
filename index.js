@@ -13,6 +13,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.changeSeason = this.changeSeason.bind(this);
+        this.changeTab = this.changeTab.bind(this);
         this.currentYear = new Date().getFullYear();
         this.state = {
             races: [],
@@ -21,7 +22,7 @@ class App extends React.Component {
             viewOptions: {
                 seasonSelect: '',
                 selectedTab: 'races',
-                loading: true,
+                loading: false,
                 error: false
             }
         }
@@ -29,6 +30,14 @@ class App extends React.Component {
 
     changeSeason(newSeason){
         this.getData(newSeason);
+    }
+
+    changeTab(newTab){
+        this.setState({
+            viewOptions: {
+                selectedTab: newTab
+            }
+        })
     }
 
     getData(loadYear){
@@ -70,6 +79,9 @@ class App extends React.Component {
                     }
 
                 })
+                .then(function(){
+                    
+                })
                 .catch(function(){
                     //router.push({ name: 'error' });
                 });
@@ -83,9 +95,26 @@ class App extends React.Component {
     }
 
     render() {
+        let selectedTab;
+
+        if(this.state.viewOptions.selectedTab == 'races'){
+            selectedTab = <RaceResults races={this.state.races} />;
+        } else if(this.state.viewOptions.selectedTab == 'drivers'){
+            selectedTab = <DriverStandings standings={this.state.driverStandings} />;
+        } else if(this.state.viewOptions.selectedTab == 'constructors'){
+            selectedTab = <ConstructorStandings standings={this.state.constructorStandings} />;
+        }
+
+        let loadingOverlay;
+        if(this.state.viewOptions.loading == true){
+            loadingOverlay = <section className="overlay">
+                <div className="loading-spinner"></div>
+            </section>;
+        }
+
         return (
             <div id="page">
-                <PageHeader onSeasonSelect={this.changeSeason}></PageHeader>
+                <PageHeader onSeasonSelect={this.changeSeason} onChangeTab={this.changeTab}></PageHeader>
 
                 <main className="content-area">
 
@@ -93,19 +122,11 @@ class App extends React.Component {
                         <h1>Season</h1>
                     </header>
                     
-                    <RaceResults races={this.state.races} />
-                
                     <section className="content-block">
-                        <DriverStandings standings={this.state.driverStandings} />
+                        {selectedTab}
                     </section>
 
-                    <section className="content-block">
-                        <ConstructorStandings standings={this.state.constructorStandings} />
-                    </section>
-
-                    <section className="overlay">
-                        <div className="loading-spinner"></div>
-                    </section>
+                    {loadingOverlay}
 
                 </main>
 

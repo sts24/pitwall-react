@@ -33,7 +33,7 @@ export default class DriverStandings extends React.Component {
                                 <tr key={driver.Driver.code}>
                                     <td>{driver.position}</td>
                                     <td>
-                                        <a  target="_blank">{driver.Driver.givenName + ' ' + driver.Driver.familyName}</a> 
+                                        <a href={driver.Driver.url} target="_blank">{driver.Driver.givenName + ' ' + driver.Driver.familyName}</a> 
                                         <img className="nation-flag" />
                                     </td>
                                     <td>{driver.Constructors[0].name}</td>
