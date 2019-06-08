@@ -19,12 +19,11 @@ class App extends React.Component {
             races: [],
             driverStandings: [],
             constructorStandings: [],
-            viewOptions: {
-                seasonSelect: '',
-                selectedTab: 'races',
-                loading: false,
-                error: false
-            }
+            seasonSelect: '',
+            selectedTab: 'races',
+            loading: false,
+            error: false
+          
         }
     }
 
@@ -34,13 +33,15 @@ class App extends React.Component {
 
     changeTab(newTab){
         this.setState({
-            viewOptions: {
-                selectedTab: newTab
-            }
-        })
+            selectedTab: newTab
+        });
     }
 
     getData(loadYear){
+	    
+	    this.setState({
+			seasonSelect: loadYear
+	    });
         
         let $this = this;
 
@@ -80,7 +81,7 @@ class App extends React.Component {
 
                 })
                 .then(function(){
-                    
+                   
                 })
                 .catch(function(){
                     //router.push({ name: 'error' });
@@ -97,16 +98,16 @@ class App extends React.Component {
     render() {
         let selectedTab;
 
-        if(this.state.viewOptions.selectedTab == 'races'){
+        if(this.state.selectedTab == 'races'){
             selectedTab = <RaceResults races={this.state.races} />;
-        } else if(this.state.viewOptions.selectedTab == 'drivers'){
+        } else if(this.state.selectedTab == 'drivers'){
             selectedTab = <DriverStandings standings={this.state.driverStandings} />;
-        } else if(this.state.viewOptions.selectedTab == 'constructors'){
+        } else if(this.state.selectedTab == 'constructors'){
             selectedTab = <ConstructorStandings standings={this.state.constructorStandings} />;
         }
 
         let loadingOverlay;
-        if(this.state.viewOptions.loading == true){
+        if(this.state.loading == true){
             loadingOverlay = <section className="overlay">
                 <div className="loading-spinner"></div>
             </section>;
@@ -119,7 +120,7 @@ class App extends React.Component {
                 <main className="content-area">
 
                     <header className="content-header content-block">
-                        <h1>Season</h1>
+                        <h1>{this.state.seasonSelect} Season</h1>
                     </header>
                     
                     <section className="content-block">

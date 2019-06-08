@@ -3,7 +3,10 @@ import React from 'react';
 export default class RaceTable extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { hasError: false };
+        this.state = {
+	        hasError: false,
+	        showAll: false
+	    };
     }
 
     static getDerivedStateFromError(error) {
@@ -31,14 +34,20 @@ export default class RaceTable extends React.Component {
 
         return months[raceUTC.getMonth()] + ' ' + raceUTC.getDate() + ', ' + raceUTC.getFullYear();
     }
+    
+    showAllToggle(e){
+	    e.preventDefault();
+	    
+	    this.setState({
+		    showAll: !this.state.showAll
+	    });
+    }
 
     render(){
         if(!this.state.hasError){
 
             const race = this.props.results;
-
-            
-
+			
             return(
                 <section className="race-table">
 
@@ -49,7 +58,7 @@ export default class RaceTable extends React.Component {
                     </header>
 
                     <div className="chart-wrap">
-                        <table className="chart">
+                        <table className={this.state.showAll ? 'chart show-all' : 'chart'}>
                             <thead>
                                 <tr>
                                     <th className="th-pos">Pos</th>
@@ -88,13 +97,16 @@ export default class RaceTable extends React.Component {
                                 }
                                 
                             </tbody>
+                            
+                            	{this.state.showAll === false &&
                             <tfoot>
                                 <tr>
                                     <td colSpan="10">
-                                        <button className="show-all-btn">Show Entire Results</button>
+                                        <button className="show-all-btn" onClick={this.showAllToggle.bind(this)}>Show Entire Results</button>
                                     </td>
                                 </tr>
-                            </tfoot>
+							</tfoot>
+							}
                         </table>
                     </div>
 

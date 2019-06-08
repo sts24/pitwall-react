@@ -11,10 +11,6 @@ export default class RaceResults extends React.Component {
             <div className="race-results">
                 <header className="races-header">
                     <h2>Race Results</h2>
-        
-                    <button className="button">Sort By Oldest First</button>
-                    <button className="button">Sort By Newest First</button>
-        
                 </header>
 
                 {
