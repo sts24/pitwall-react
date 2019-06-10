@@ -5,7 +5,8 @@ export default class RaceTable extends React.Component {
         super(props);
         this.state = {
 	        hasError: false,
-	        showAll: false
+            showAll: false,
+            loading: true
 	    };
     }
 
@@ -43,12 +44,19 @@ export default class RaceTable extends React.Component {
 	    });
     }
 
+    componentDidMount() {
+        this.setState({
+            loading: false
+        });
+    }
+
     render(){
         if(!this.state.hasError){
 
+                
             const race = this.props.results;
-			
-            return(
+        
+            return (
                 <section className="race-table">
 
                     <header>
@@ -80,7 +88,7 @@ export default class RaceTable extends React.Component {
                                             <td>{car.positionText}</td>
                                             {this.gridDiff(car)}
                                             <td>
-                                                <a href={car.Driver.url} target="_blank">{car.Driver.givenName} {car.Driver.familyName}</a> 
+                                                <a href={car.Driver.url} target="_blank">{car.Driver.givenName} {car.Driver.familyName}</a>
                                                 <img className="nation-flag" /></td>
                                             <td>{car.grid}</td>
                                             <td>{car.number}</td>
@@ -95,23 +103,26 @@ export default class RaceTable extends React.Component {
                                         </tr>
                                     ))
                                 }
-                                
-                            </tbody>
                             
-                            	{this.state.showAll === false &&
-                            <tfoot>
-                                <tr>
-                                    <td colSpan="10">
-                                        <button className="show-all-btn" onClick={this.showAllToggle.bind(this)}>Show Entire Results</button>
-                                    </td>
-                                </tr>
-							</tfoot>
-							}
+                            </tbody>
+                        
+                            {this.state.showAll === false &&
+                                <tfoot>
+                                    <tr>
+                                        <td colSpan="10">
+                                            <button className="show-all-btn" onClick={this.showAllToggle.bind(this)}>Show Entire Results</button>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            }
                         </table>
                     </div>
 
                 </section>
             )
+                
+          
+
         }
     }
 }

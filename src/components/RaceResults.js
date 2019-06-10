@@ -6,6 +6,9 @@ export default class RaceResults extends React.Component {
         super(props);
     }
 
+   
+
+
     render(){
         return(
             <div className="race-results">
@@ -13,9 +16,14 @@ export default class RaceResults extends React.Component {
                     <h2>Race Results</h2>
                 </header>
 
-                { this.props.races.map(race => (
+                
+          
+                    
+                {this.props.races.map(race => (
                     <RaceTable results={race} key={race.round + '-' + race.date} />
-                )) }
+                ))
+                    
+                }
             </div>
         )
     };

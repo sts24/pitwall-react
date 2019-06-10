@@ -126,11 +126,11 @@ class App extends React.Component {
                         	
                     </section>
 
-                    {this.state.loading == true &&
+                    {/* {this.state.loading == true &&
 			            <section className="overlay">
 			                <div className="loading-spinner"></div>
 			            </section>
-			        }
+			        } */}
 
                 </main>
 
