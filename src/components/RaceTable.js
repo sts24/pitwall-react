@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 export default class RaceTable extends React.Component {
     constructor(props) {
         super(props);
@@ -45,15 +46,15 @@ export default class RaceTable extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({
-            loading: false
-        });
+       
+        // this.setState({
+        //     loading: false
+        // });
     }
 
     render(){
         if(!this.state.hasError){
 
-                
             const race = this.props.results;
         
             return (
@@ -126,3 +127,4 @@ export default class RaceTable extends React.Component {
         }
     }
 }
+

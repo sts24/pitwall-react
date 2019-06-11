@@ -1,9 +1,13 @@
 import React from "react";
+import modelStore from "../state";
+import { observer } from "mobx-react";
 
+@observer
 export default class PageHeader extends React.Component {
 
     constructor(props) {
         super(props);
+        this.modelStore = modelStore;
         this.seasonSelect = this.seasonSelect.bind(this);
         this.changeTab = this.changeTab.bind(this);
         this.state = {
@@ -11,7 +15,8 @@ export default class PageHeader extends React.Component {
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
+        // this will prefill season select menu with all years since 1950
         let currentYear = new Date().getFullYear();
         let yearList = [];
         for(let year = 1950; year <= currentYear; year++){
@@ -24,12 +29,14 @@ export default class PageHeader extends React.Component {
     }
 
     seasonSelect(e){
-        this.props.onSeasonSelect(e.target.value);
+        this.modelStore.getData(e.target.value);
     }
 
     changeTab(value,e){
         e.preventDefault();
-        this.props.onChangeTab(value);
+        this.modelStore.setViewOptions({
+            selectedTab: value
+        });
     }
 
     render(){

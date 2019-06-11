@@ -1,11 +1,18 @@
 import React from "react";
+import modelStore from "../state";
+import { observer } from "mobx-react";
 
+
+@observer
 export default class ConstructorStandings extends React.Component {
     constructor(props) {
         super(props);
+        this.modelStore = modelStore;
     }
 
-    render(){
+    render() {
+        let standings = this.modelStore.constructors;
+
         return(
             <section className="standings-table">
 
@@ -25,7 +32,7 @@ export default class ConstructorStandings extends React.Component {
                         </thead>
                         <tbody>
                             {
-                                this.props.standings.map(c => (
+                                standings.map(c => (
                                     <tr key={c.Constructor.name}>
                                         <td>{c.position}</td>
                                         <td>

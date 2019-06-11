@@ -1,13 +1,17 @@
 import React from "react";
+import modelStore from "../state";
+import { observer } from "mobx-react";
 
-
-
+@observer
 export default class DriverStandings extends React.Component {
     constructor(props) {
         super(props);
+        this.modelStore = modelStore;
     }
 
-    render(){
+    render() {
+        let standings = this.modelStore.drivers;
+
         return(
             <section className="standings-table">
 
@@ -28,7 +32,7 @@ export default class DriverStandings extends React.Component {
                         </thead>
                         <tbody>
                             {
-                                this.props.standings.map(driver => (
+                                standings.map(driver => (
       
                                 <tr key={driver.Driver.code}>
                                     <td>{driver.position}</td>
